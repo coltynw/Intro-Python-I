@@ -31,37 +31,15 @@ import sys
 import calendar
 from datetime import datetime
 
-def printMonth(month = datetime.now().month, year = datetime.now().year):
-    print(calendar.month(year, month))
+from datetime import datetime
 
-def isNumber(number):
-    try:
-        value = int(number)
-        return True
-    except ValueError:
-        return False
+now = datetime.now()  # get current time at script execution
 
-def checkNums():
-    for arg in sys.argv[1:]:
-        if not isNumber(arg):
-            print("Please enter numbers", arg)
-
-
-if len(sys.argv) == 3:
-    checkNums()
-    if int(sys.argv[1]) > 0 and int(sys.argv[1]) < 13:
-        month = int(sys.argv[1])
-        year = int(sys.argv[2])
-        printMonth(month, year)
-    else:
-        print(f"{sys.argv[1]} is not a month")
+if len(sys.argv) == 1:
+    calendar.prmonth(now.year, now.month)
 elif len(sys.argv) == 2:
-    checkNums()
-    if int(sys.argv[1]) > 0 and int(sys.argv[1]) < 13:
-        month = int(sys.argv[1])
-        year = datetime.now().year
-        printMonth(month)
-    else:
-        print(f"{sys.argv[1]} is not a month")
+    calendar.prmonth(now.year, int(sys.argv[1]))
+elif len(sys.argv) == 3:
+    calendar.prmonth(int(sys.argv[2]), int(sys.argv[1]))
 else:
-    printMonth() 
+    print("Usage: 14_cal.py [month] [year]")
